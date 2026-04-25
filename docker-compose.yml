@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  inventory-app:
+    build: .
+    container_name: stockpro-inventory
+    ports:
+      - "3000:3000"
+    volumes:
+      - inventory-data:/app/data
+    environment:
+      - DATABASE_URL=file:/app/data/prod.db
+      - AUTH_SECRET=my-production-long-secure-secret-key
+    restart: unless-stopped
+
+volumes:
+  inventory-data:
